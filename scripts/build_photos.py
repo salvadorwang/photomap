@@ -219,8 +219,10 @@ def main():
     overrides = {unicodedata.normalize("NFC", k): v
                  for k, v in load_json(OVERRIDES_FILE, {}).items()}
     cache = load_json(GEOCACHE_FILE, {})
-    # 上次生成的日期，用于保持稳定（键用原图路径）
-    prev_dates = {(e.get("original") or e["file"]): e.get("date")
+    # 上次生成的日期，用于保持稳定（键用原图路径，统一 NFC：
+    # macOS 文件系统给 NFD、git 提交转成 NFC，不归一会匹配不上）
+    nfc = lambda s: unicodedata.normalize("NFC", s)
+    prev_dates = {nfc(e.get("original") or e["file"]): e.get("date")
                   for e in load_json(OUTPUT_JSON, [])}
 
     entries = []
@@ -239,7 +241,7 @@ def main():
 
         # 日期：文件名中显式给出 > 上次生成结果 > 文件生成日期
         if not date:
-            date = prev_dates.get(f"photos/{f.name}") or file_date(f)
+            date = prev_dates.get(nfc(f"photos/{f.name}")) or file_date(f)
 
         # 坐标：overrides > EXIF GPS > 地名地理编码
         coords = None
@@ -280,9 +282,9 @@ def main():
         resize_to(f, display, DISPLAY_SIZE, 82)
 
         entries.append({
-            "file": f"photos/display/{display.name}",
-            "original": f"photos/{f.name}",
-            "thumb": f"photos/thumbs/{thumb.name}",
+            "file": nfc(f"photos/display/{display.name}"),
+            "original": nfc(f"photos/{f.name}"),
+            "thumb": nfc(f"photos/thumbs/{thumb.name}"),
             "lat": coords[0],
             "lng": coords[1],
             "date": date,
