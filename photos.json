@@ -1,5 +1,16 @@
 [
   {
+    "file": "photos/display/山寺.jpg",
+    "original": "photos/山寺.HEIC",
+    "thumb": "photos/thumbs/山寺.jpg",
+    "lat": 38.313775,
+    "lng": 140.434769,
+    "date": "2025-12-30",
+    "location": "山寺",
+    "location_en": "Yamagata, Yamagata Prefecture",
+    "caption": ""
+  },
+  {
     "file": "photos/display/糸島.jpg",
     "original": "photos/糸島.JPG",
     "thumb": "photos/thumbs/糸島.jpg",

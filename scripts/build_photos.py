@@ -36,6 +36,13 @@ from pathlib import Path
 
 from PIL import Image, ImageOps, ExifTags
 
+try:
+    from pillow_heif import register_heif_opener
+    register_heif_opener()          # 让 Pillow 认识 HEIC/HEIF (iPhone 默认格式)
+    HEIC_OK = True
+except ImportError:
+    HEIC_OK = False
+
 ROOT = Path(__file__).resolve().parent.parent
 PHOTOS_DIR = ROOT / "photos"
 THUMBS_DIR = PHOTOS_DIR / "thumbs"
@@ -46,7 +53,7 @@ GEOCACHE_FILE = ROOT / "scripts" / "geocache.json"
 
 THUMB_SIZE = 128          # 缩略图最长边像素
 DISPLAY_SIZE = 2000       # 网页展示大图最长边像素（原图太大，直接加载很慢）
-EXTS = {".jpg", ".jpeg", ".png", ".webp"}
+EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
@@ -93,13 +100,21 @@ def file_date(path):
 
 
 def exif_data(img):
+    """读 EXIF（getexif 对 JPEG/HEIC 都有效；_getexif 只支持 JPEG）。"""
     try:
-        raw = img._getexif()
+        ex = img.getexif()
     except Exception:
-        raw = None
-    if not raw:
         return {}
-    return {ExifTags.TAGS.get(k, k): v for k, v in raw.items()}
+    if not ex:
+        return {}
+    data = {ExifTags.TAGS.get(k, k): v for k, v in ex.items()}
+    try:
+        gps = ex.get_ifd(ExifTags.IFD.GPSInfo)
+        if gps:
+            data["GPSInfo"] = dict(gps)
+    except Exception:
+        pass
+    return data
 
 
 def dms_to_deg(dms, ref):
@@ -209,6 +224,10 @@ def main():
     files = sorted(p for p in PHOTOS_DIR.iterdir()
                    if p.is_file() and p.suffix.lower() in EXTS)
     for f in files:
+        if f.suffix.lower() in {".heic", ".heif"} and not HEIC_OK:
+            print(f"⚠️ 跳过 {f.name}: 读取 HEIC 需要安装 pillow-heif "
+                  f"(pip install pillow-heif)", file=sys.stderr)
+            continue
         print(f"处理 {f.name} ...")
         location, date, caption = parse_filename(f.stem)
 
@@ -268,6 +287,14 @@ def main():
             "location_en": loc_en,
             "caption": caption,
         })
+
+    # 清理源图已删除的孤儿缩略图/展示图
+    stems = {f.stem for f in files}
+    for d in (THUMBS_DIR, DISPLAY_DIR):
+        for t in d.glob("*.jpg"):
+            if t.stem not in stems:
+                t.unlink()
+                print(f"清理孤儿文件 {t.relative_to(ROOT)}")
 
     entries.sort(key=lambda e: e["date"] or "", reverse=True)
     OUTPUT_JSON.write_text(json.dumps(entries, ensure_ascii=False, indent=2),

@@ -30,7 +30,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install Pillow
+        run: pip install Pillow pillow-heif
 
       - name: Generate thumbnails & photos.json
         run: python scripts/build_photos.py
