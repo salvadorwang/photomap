@@ -1,5 +1,25 @@
 [
   {
+    "file": "photos/男木岛.jpg",
+    "thumb": "photos/thumbs/男木岛.jpg",
+    "lat": 34.425054,
+    "lng": 134.060021,
+    "date": "2025-07-15",
+    "location": "男木岛",
+    "location_en": "Takamatsu, Kagawa Prefecture",
+    "caption": ""
+  },
+  {
+    "file": "photos/男木岛_2.jpg",
+    "thumb": "photos/thumbs/男木岛_2.jpg",
+    "lat": 34.425054,
+    "lng": 134.060021,
+    "date": "2025-07-15",
+    "location": "男木岛",
+    "location_en": "Takamatsu, Kagawa Prefecture",
+    "caption": ""
+  },
+  {
     "file": "photos/仙台_2025-06-01_鲁迅故地.jpg",
     "thumb": "photos/thumbs/仙台_2025-06-01_鲁迅故地.jpg",
     "lat": 38.267755,

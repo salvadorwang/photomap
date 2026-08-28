@@ -2,10 +2,17 @@
 """
 扫描 photos/ 下的照片，自动生成 photos.json 和缩略图。
 
-文件名约定（用下划线分隔）：
-    地点_日期_说明.jpg      例如: 东京涩谷_2025-03-12_樱花季.jpg
-    地点_日期.jpg           例如: 仙台_2025-06-01.jpg
-    地点.jpg               （日期尝试从 EXIF 读取）
+文件名约定：
+    地点.jpg               例如: 男木岛.jpg
+    同一地点多张照片时加数字后缀区分，会自动忽略:
+    男木岛2.jpg / 男木岛_2.jpg / 男木岛 (2).jpg
+    （也兼容旧格式 地点_YYYY-MM-DD_说明.jpg，文件名中的日期/说明优先生效）
+
+拍摄日期来源优先级：
+    1. overrides.json 中手动指定
+    2. 已生成的 photos.json 中该文件的日期（保持稳定，避免 CI 重算时漂移）
+    3. 本地运行: 文件创建时间；GitHub Actions 中: 该文件首次加入 git 的日期
+       （git checkout 不保留文件创建时间，CI 里直接读会全变成构建当天）
 
 坐标来源优先级：
     1. overrides.json 中手动指定的坐标（键为文件名）
@@ -17,11 +24,14 @@
 """
 
 import json
+import os
 import re
+import subprocess
 import sys
 import time
 import urllib.parse
 import urllib.request
+from datetime import datetime
 from pathlib import Path
 
 from PIL import Image, ExifTags
@@ -49,6 +59,8 @@ def load_json(path, default):
 
 def parse_filename(stem):
     """从文件名解析 (地点, 日期, 说明)。"""
+    # 去掉同名照片的数字后缀: 男木岛2 / 男木岛_2 / 男木岛 (2) / 男木岛-2
+    stem = re.sub(r"[\s_\-]*\(?\d+\)?$", "", stem).strip() or stem
     parts = stem.split("_")
     location = parts[0].strip()
     date = None
@@ -59,6 +71,23 @@ def parse_filename(stem):
         rest = rest[1:]
     caption = " ".join(rest).strip()
     return location, date, caption
+
+
+def file_date(path):
+    """文件生成日期。CI 中文件系统时间不可靠，改用该文件首次进入 git 的日期。"""
+    if os.environ.get("GITHUB_ACTIONS"):
+        try:
+            out = subprocess.run(
+                ["git", "log", "--follow", "--diff-filter=A", "--format=%aI", "-1",
+                 "--", str(path.relative_to(ROOT))],
+                capture_output=True, text=True, cwd=ROOT, check=False).stdout.strip()
+            if out:
+                return out.splitlines()[-1][:10]
+        except Exception:
+            pass
+    st = path.stat()
+    ts = getattr(st, "st_birthtime", None) or st.st_mtime
+    return datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
 
 
 def exif_data(img):
@@ -91,16 +120,6 @@ def exif_gps(exif):
     if lat is None or lng is None:
         return None
     return lat, lng
-
-
-def exif_date(exif):
-    for key in ("DateTimeOriginal", "DateTime"):
-        val = exif.get(key)
-        if val:
-            m = re.match(r"(\d{4}):(\d{2}):(\d{2})", str(val))
-            if m:
-                return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-    return None
 
 
 def nominatim_search(query, lang=None):
@@ -178,6 +197,8 @@ def main():
     THUMBS_DIR.mkdir(parents=True, exist_ok=True)
     overrides = load_json(OVERRIDES_FILE, {})
     cache = load_json(GEOCACHE_FILE, {})
+    # 上次生成的日期，用于保持稳定
+    prev_dates = {e["file"]: e.get("date") for e in load_json(OUTPUT_JSON, [])}
 
     entries = []
     files = sorted(p for p in PHOTOS_DIR.iterdir()
@@ -189,9 +210,9 @@ def main():
         with Image.open(f) as img:
             exif = exif_data(img)
 
-        # 日期：文件名优先，其次 EXIF
+        # 日期：文件名中显式给出 > 上次生成结果 > 文件生成日期
         if not date:
-            date = exif_date(exif)
+            date = prev_dates.get(f"photos/{f.name}") or file_date(f)
 
         # 坐标：overrides > EXIF GPS > 地名地理编码
         coords = None
