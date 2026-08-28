@@ -30,11 +30,11 @@ async function init() {
     const cities = await citiesRes.json();
     cityLabels = cities.features.map((f) => ({
       lat: f.geometry.coordinates[1], lng: f.geometry.coordinates[0],
-      text: f.properties.name, city: true
+      text: asciiName(f.properties.name), city: true
     }));
     countryLabels = countriesGeo.features.map((f) => {
       const c = featureLabelPoint(f);
-      return { lat: c[1], lng: c[0], text: f.properties.NAME, city: false };
+      return { lat: c[1], lng: c[0], text: asciiName(f.properties.NAME), city: false };
     });
   } catch (e) {
     console.error('Failed to load data', e);
@@ -77,19 +77,30 @@ function featureLabelPoint(f) {
   return best || [0, 0];
 }
 
-// 国家整体包围盒（经度以标签点为参考展开，正确处理跨 180° 经线的国家）
+// 国家主体包围盒：跳过离主体中心太远的环（阿拉斯加、夏威夷、海外领地等），
+// 经度以标签点为参考展开，正确处理跨 180° 经线的国家
 function featureBounds(f) {
-  const [refLng] = featureLabelPoint(f);
+  const [refLng, refLat] = featureLabelPoint(f);
   const norm = (x) => { let d = x - refLng; while (d > 180) d -= 360; while (d < -180) d += 360; return refLng + d; };
   let minX = Infinity, maxX = -Infinity, minY = 90, maxY = -90;
   for (const ring of featureRings(f)) {
+    let rMinX = Infinity, rMaxX = -Infinity, rMinY = 90, rMaxY = -90;
     for (const [x, y] of ring) {
       const nx = norm(x);
-      if (nx < minX) minX = nx; if (nx > maxX) maxX = nx;
-      if (y < minY) minY = y; if (y > maxY) maxY = y;
+      if (nx < rMinX) rMinX = nx; if (nx > rMaxX) rMaxX = nx;
+      if (y < rMinY) rMinY = y; if (y > rMaxY) rMaxY = y;
     }
+    const cx = (rMinX + rMaxX) / 2, cy = (rMinY + rMaxY) / 2;
+    if (Math.abs(cx - refLng) > 25 || Math.abs(cy - refLat) > 20) continue;  // 远离主体，不计入
+    if (rMinX < minX) minX = rMinX; if (rMaxX > maxX) maxX = rMaxX;
+    if (rMinY < minY) minY = rMinY; if (rMaxY > maxY) maxY = rMaxY;
   }
   return { minLat: minY, maxLat: maxY, minLng: minX, maxLng: maxX };
+}
+
+// 标签字体只含基础拉丁字母，去掉变音符（Ōsaka -> Osaka, São Paulo -> Sao Paulo）
+function asciiName(s) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 function findCountryFeature(name) {
@@ -168,9 +179,8 @@ function initMap() {
 /* ---------- 地球仪 (globe.gl) ---------- */
 function initGlobe() {
   const el = $('globe');
-  globe = Globe()(el)
-    .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-    .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+  globe = Globe({ rendererConfig: { antialias: true } })(el)
+    .globeImageUrl('data/earth-texture.jpg')
     .backgroundImageUrl('https://unpkg.com/three-globe/example/img/night-sky.png')
     .htmlElementsData(photos)
     .htmlLat('lat')
@@ -207,6 +217,8 @@ function initGlobe() {
   }
 
   globe.controls().autoRotate = false;   // 不自动旋转，仅手动拖动
+  // 视网膜屏按物理像素渲染，否则贴图和文字发虚
+  globe.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
   if (photos.length > 0) {
     globe.pointOfView({ lat: photos[0].lat, lng: photos[0].lng, altitude: 2 }, 1500);
@@ -215,12 +227,21 @@ function initGlobe() {
   window.addEventListener('resize', resizeGlobe);
 }
 
+let lastLabelAlt = 2;
+
 function refreshLabels(force) {
   const alt = globe.pointOfView().altitude;
   const showCities = alt < 1.0;
-  if (!force && showCities === citiesShown) return;
+  const altChanged = Math.abs(alt - lastLabelAlt) / lastLabelAlt > 0.12;
+  if (!force && showCities === citiesShown && !altChanged) return;
   citiesShown = showCities;
-  globe.labelsData(showCities ? countryLabels.concat(cityLabels) : countryLabels);
+  lastLabelAlt = alt;
+  // 标签是 3D 物体，放大时会跟着变大；按视角高度反向缩放，让屏幕字号基本恒定
+  const k = Math.min(Math.max(alt / 2, 0.1), 1.25);
+  globe
+    .labelSize((d) => (d.city ? 0.55 : 0.9) * k)
+    .labelDotRadius((d) => (d.city ? 0.12 : 0) * k)
+    .labelsData(showCities ? countryLabels.concat(cityLabels) : countryLabels);
 }
 
 function zoomGlobe(factor) {
