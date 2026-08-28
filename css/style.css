@@ -1,0 +1,65 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #0d1117; color: #e6edf3;
+}
+body { display: flex; flex-direction: column; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; background: #161b22; border-bottom: 1px solid #30363d;
+  z-index: 1000;
+}
+.topbar h1 { margin: 0; font-size: 18px; font-weight: 600; }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+#photo-count { font-size: 13px; color: #8b949e; }
+#toggle-view {
+  padding: 8px 16px; border: 1px solid #30363d; border-radius: 8px;
+  background: #21262d; color: #e6edf3; font-size: 14px; cursor: pointer;
+  transition: background .15s;
+}
+#toggle-view:hover { background: #30363d; }
+
+#stage { flex: 1; position: relative; min-height: 0; }
+#map, #globe { position: absolute; inset: 0; }
+#map { background: #0d1117; }
+#globe { background: #000; overflow: hidden; }
+.hidden { display: none !important; }
+
+/* 地图上的缩略图标记 */
+.photo-marker {
+  border: 2px solid #fff; border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  object-fit: cover; cursor: pointer; background: #444;
+  transition: transform .12s;
+}
+.photo-marker:hover { transform: scale(1.15); z-index: 999 !important; }
+
+/* 地球仪上的缩略图 */
+.globe-thumb {
+  width: 48px; height: 48px; border: 2px solid #fff; border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.6);
+  object-fit: cover; cursor: pointer;
+}
+
+/* 大图弹窗 */
+#lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+#lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.8); }
+#lightbox-card {
+  position: relative; max-width: min(90vw, 900px); max-height: 90vh;
+  background: #161b22; border-radius: 12px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,.7);
+}
+#lightbox-img { max-width: 100%; max-height: 70vh; object-fit: contain; background: #000; }
+#lightbox-info { padding: 14px 20px 18px; }
+#lightbox-info h2 { margin: 0 0 6px; font-size: 18px; }
+#lightbox-info p { margin: 4px 0; font-size: 14px; }
+#lightbox-info .meta { color: #8b949e; font-size: 13px; }
+#lightbox-close {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  width: 32px; height: 32px; border: none; border-radius: 50%;
+  background: rgba(0,0,0,.55); color: #fff; font-size: 16px; cursor: pointer;
+}
+#lightbox-close:hover { background: rgba(0,0,0,.8); }

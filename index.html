@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的照片地图</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>📷 我的照片地图</h1>
+    <div class="topbar-right">
+      <span id="photo-count"></span>
+      <button id="toggle-view" title="切换 地图 / 地球仪">🌍 切换地球仪</button>
+    </div>
+  </header>
+
+  <main id="stage">
+    <div id="map"></div>
+    <div id="globe" class="hidden"></div>
+  </main>
+
+  <!-- 大图弹窗 -->
+  <div id="lightbox" class="hidden">
+    <div id="lightbox-backdrop"></div>
+    <div id="lightbox-card">
+      <button id="lightbox-close" aria-label="关闭">✕</button>
+      <img id="lightbox-img" src="" alt="">
+      <div id="lightbox-info">
+        <h2 id="lb-location"></h2>
+        <p id="lb-caption"></p>
+        <p class="meta"><span id="lb-date"></span> · <span id="lb-coords"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/globe.gl@2.31.0/dist/globe.gl.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

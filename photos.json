@@ -1,0 +1,29 @@
+[
+  {
+    "file": "photos/仙台_2025-06-01_鲁迅故地.jpg",
+    "thumb": "photos/thumbs/仙台_2025-06-01_鲁迅故地.jpg",
+    "lat": 38.267755,
+    "lng": 140.86915,
+    "date": "2025-06-01",
+    "location": "仙台",
+    "caption": "鲁迅故地"
+  },
+  {
+    "file": "photos/东京涩谷_2025-03-12_樱花季.jpg",
+    "thumb": "photos/thumbs/东京涩谷_2025-03-12_樱花季.jpg",
+    "lat": 35.65808,
+    "lng": 139.701765,
+    "date": "2025-03-12",
+    "location": "东京涩谷",
+    "caption": "樱花季"
+  },
+  {
+    "file": "photos/北京_2024-10-05_故宫.jpg",
+    "thumb": "photos/thumbs/北京_2024-10-05_故宫.jpg",
+    "lat": 39.905714,
+    "lng": 116.391297,
+    "date": "2024-10-05",
+    "location": "北京",
+    "caption": "故宫"
+  }
+]
