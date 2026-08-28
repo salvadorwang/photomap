@@ -202,6 +202,28 @@ def english_name(location, coords, cache):
     return en
 
 
+def country_name(coords, cache):
+    """坐标 -> 英文国家名（粗粒度反向地理编码，结果缓存）。"""
+    key = f"country:{coords[0]:.2f},{coords[1]:.2f}"
+    if key in cache:
+        return cache[key]
+    url = (f"https://nominatim.openstreetmap.org/reverse?format=json"
+           f"&lat={coords[0]}&lon={coords[1]}&zoom=3&accept-language=en")
+    req = urllib.request.Request(url, headers={"User-Agent": "photomap-site/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            result = json.loads(r.read().decode())
+        time.sleep(1.1)
+    except Exception as e:
+        print(f"  国家名请求失败: {e}", file=sys.stderr)
+        return None
+    country = (result.get("address") or {}).get("country")
+    if country and not country.isascii():
+        country = None
+    cache[key] = country
+    return country
+
+
 def resize_to(src, dst, max_side, quality):
     if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
         return
@@ -276,6 +298,11 @@ def main():
             if loc_en:
                 print(f"  英文地名: {loc_en}")
 
+        # 所在国家（英文，用于前端国家筛选菜单）
+        country = (ov or {}).get("country") or country_name(coords, cache)
+        if country:
+            print(f"  国家: {country}")
+
         thumb = THUMBS_DIR / (f.stem + ".jpg")
         resize_to(f, thumb, THUMB_SIZE, 75)
         display = DISPLAY_DIR / (f.stem + ".jpg")
@@ -290,6 +317,7 @@ def main():
             "date": date,
             "location": location,
             "location_en": loc_en,
+            "country": country,
             "caption": caption,
         })
 

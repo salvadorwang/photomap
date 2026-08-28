@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Photo Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
   <header class="topbar">
@@ -19,6 +19,11 @@
   <main id="stage">
     <div id="map" class="hidden"></div>
     <div id="globe"></div>
+    <select id="country-select" title="Jump to a country"></select>
+    <div id="globe-zoom">
+      <button id="gz-in" title="Zoom in">+</button>
+      <button id="gz-out" title="Zoom out">−</button>
+    </div>
   </main>
 
   <!-- 大图弹窗 -->
@@ -37,6 +42,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/globe.gl@2.31.0/dist/globe.gl.min.js"></script>
-  <script src="js/app.js?v=4"></script>
+  <script src="js/app.js?v=5"></script>
 </body>
 </html>

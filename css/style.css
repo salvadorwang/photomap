@@ -43,6 +43,30 @@ body { display: flex; flex-direction: column; }
   object-fit: cover; cursor: pointer;
 }
 
+/* 国家下拉菜单（两种视图共用，左上角） */
+#country-select {
+  position: absolute; top: 12px; left: 12px; z-index: 1100;
+  padding: 8px 12px; font-size: 14px;
+  background: #fff; color: #1d1d1f;
+  border: 2px solid rgba(0,0,0,.25); border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.3); cursor: pointer;
+}
+
+/* 地球仪缩放按钮（右上角，切到 2D 时隐藏） */
+#globe-zoom {
+  position: absolute; top: 12px; right: 12px; z-index: 1100;
+  display: flex; flex-direction: column; gap: 6px;
+}
+#globe-zoom button {
+  width: 36px; height: 36px; font-size: 20px; line-height: 1;
+  background: #fff; color: #1d1d1f;
+  border: 2px solid rgba(0,0,0,.25); border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.3); cursor: pointer;
+}
+#globe-zoom button:hover { background: #f4f4f4; }
+/* 嵌入模式下切换按钮占了右上角，缩放按钮往下挪 */
+body.embedded #globe-zoom { top: 64px; }
+
 /* 嵌入模式（主站 iframe）：隐藏标题栏，切换按钮悬浮在地图右上角 */
 body.embedded .topbar { display: none; }
 body.embedded #toggle-view {
