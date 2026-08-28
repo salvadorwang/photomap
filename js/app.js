@@ -1,9 +1,9 @@
 /* 照片地图主逻辑：Leaflet 平面地图 + globe.gl 地球仪，按钮切换 */
 
 let photos = [];
-let map = null;        // Leaflet
-let globe = null;      // globe.gl（首次切换时才初始化，节省加载）
-let showingGlobe = false;
+let map = null;        // Leaflet（首次切换到 2D 时才初始化）
+let globe = null;      // globe.gl（默认视图）
+let showingGlobe = true;
 
 const $ = (id) => document.getElementById(id);
 
@@ -24,7 +24,7 @@ async function init() {
   }
   $('photo-count').textContent = `${photos.length} photo${photos.length === 1 ? '' : 's'}`;
 
-  initMap();
+  initGlobe();
 
   $('toggle-view').addEventListener('click', toggleView);
   $('lightbox-close').addEventListener('click', closeLightbox);
@@ -106,7 +106,8 @@ function toggleView() {
     if (!globe) initGlobe();
     else resizeGlobe();
   } else {
-    map.invalidateSize();
+    if (!map) initMap();
+    else map.invalidateSize();
   }
 }
 
