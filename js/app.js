@@ -4,10 +4,7 @@ let photos = [];
 let map = null;        // Leaflet（首次切换到 2D 时才初始化）
 let globe = null;      // globe.gl（默认视图）
 let showingGlobe = true;
-let countriesGeo = null;   // 国家边界 GeoJSON（Natural Earth 110m）
-let cityLabels = [];       // 主要城市标签（放大后显示）
-let countryLabels = [];    // 国家名标签
-let citiesShown = false;
+let countriesGeo = null;   // 国家边界 GeoJSON（仅用于国家跳转的范围计算）
 
 const $ = (id) => document.getElementById(id);
 
@@ -20,22 +17,12 @@ async function init() {
     document.getElementById('stage').appendChild(document.getElementById('toggle-view'));
   }
   try {
-    const [photosRes, countriesRes, citiesRes] = await Promise.all([
+    const [photosRes, countriesRes] = await Promise.all([
       fetch('photos.json?t=' + Date.now()),
-      fetch('data/countries.geojson'),
-      fetch('data/cities.geojson')
+      fetch('data/countries.geojson')
     ]);
     photos = await photosRes.json();
     countriesGeo = await countriesRes.json();
-    const cities = await citiesRes.json();
-    cityLabels = cities.features.map((f) => ({
-      lat: f.geometry.coordinates[1], lng: f.geometry.coordinates[0],
-      text: asciiName(f.properties.name), city: true
-    }));
-    countryLabels = countriesGeo.features.map((f) => {
-      const c = featureLabelPoint(f);
-      return { lat: c[1], lng: c[0], text: asciiName(f.properties.NAME), city: false };
-    });
   } catch (e) {
     console.error('Failed to load data', e);
     photos = photos || [];
@@ -98,10 +85,6 @@ function featureBounds(f) {
   return { minLat: minY, maxLat: maxY, minLng: minX, maxLng: maxX };
 }
 
-// 标签字体只含基础拉丁字母，去掉变音符（Ōsaka -> Osaka, São Paulo -> Sao Paulo）
-function asciiName(s) {
-  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-}
 
 function findCountryFeature(name) {
   if (!countriesGeo) return null;
@@ -143,7 +126,6 @@ function flyToCountry(name) {
     const span = Math.max(b.maxLat - b.minLat, (b.maxLng - b.minLng) * 0.7);
     const altitude = Math.min(Math.max(span / 50, 0.4), 2.5);
     globe.pointOfView({ lat: (b.minLat + b.maxLat) / 2, lng: (b.minLng + b.maxLng) / 2, altitude }, 1200);
-    setTimeout(() => refreshLabels(false), 1300);
   } else {
     map.flyToBounds([[b.minLat, b.minLng], [b.maxLat, b.maxLng]], { padding: [30, 30], duration: 1.2 });
   }
@@ -196,26 +178,6 @@ function initGlobe() {
       return img;
     });
 
-  // 国家边界线 + 名称标签（贴图本身无文字）
-  if (countriesGeo) {
-    globe
-      .polygonsData(countriesGeo.features)
-      .polygonCapColor(() => 'rgba(0,0,0,0)')
-      .polygonSideColor(() => 'rgba(0,0,0,0)')
-      .polygonStrokeColor(() => 'rgba(255,255,255,0.5)')
-      .polygonAltitude(0.002)
-      .polygonsTransitionDuration(0)
-      .labelLat('lat').labelLng('lng').labelText('text')
-      .labelSize((d) => d.city ? 0.55 : 0.9)
-      .labelDotRadius((d) => d.city ? 0.12 : 0)
-      .labelColor((d) => d.city ? 'rgba(255,225,160,0.95)' : 'rgba(255,255,255,0.85)')
-      .labelAltitude(0.004)
-      .labelResolution(2);
-    refreshLabels(true);
-    // 放大到一定程度后追加显示主要城市名
-    globe.controls().addEventListener('change', () => refreshLabels(false));
-  }
-
   globe.controls().autoRotate = false;   // 不自动旋转，仅手动拖动
   // 视网膜屏按物理像素渲染，否则贴图和文字发虚
   globe.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -227,29 +189,11 @@ function initGlobe() {
   window.addEventListener('resize', resizeGlobe);
 }
 
-let lastLabelAlt = 2;
-
-function refreshLabels(force) {
-  const alt = globe.pointOfView().altitude;
-  const showCities = alt < 1.0;
-  const altChanged = Math.abs(alt - lastLabelAlt) / lastLabelAlt > 0.12;
-  if (!force && showCities === citiesShown && !altChanged) return;
-  citiesShown = showCities;
-  lastLabelAlt = alt;
-  // 标签是 3D 物体，放大时会跟着变大；按视角高度反向缩放，让屏幕字号基本恒定
-  const k = Math.min(Math.max(alt / 2, 0.1), 1.25);
-  globe
-    .labelSize((d) => (d.city ? 0.55 : 0.9) * k)
-    .labelDotRadius((d) => (d.city ? 0.12 : 0) * k)
-    .labelsData(showCities ? countryLabels.concat(cityLabels) : countryLabels);
-}
-
 function zoomGlobe(factor) {
   if (!showingGlobe || !globe) return;
   const pov = globe.pointOfView();
   const altitude = Math.min(Math.max(pov.altitude * factor, 0.12), 4);
   globe.pointOfView({ lat: pov.lat, lng: pov.lng, altitude }, 350);
-  setTimeout(() => refreshLabels(false), 400);
 }
 
 function resizeGlobe() {

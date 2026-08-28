@@ -64,8 +64,9 @@ body { display: flex; flex-direction: column; }
   box-shadow: 0 1px 5px rgba(0,0,0,.3); cursor: pointer;
 }
 #globe-zoom button:hover { background: #f4f4f4; }
-/* 嵌入模式下切换按钮占了右上角，缩放按钮往下挪 */
+/* 嵌入模式下切换按钮占了右上角，3D/2D 的缩放按钮都往下挪避免重叠 */
 body.embedded #globe-zoom { top: 64px; }
+body.embedded .leaflet-top.leaflet-right { top: 52px; }
 
 /* 嵌入模式（主站 iframe）：隐藏标题栏，切换按钮悬浮在地图右上角 */
 body.embedded .topbar { display: none; }
