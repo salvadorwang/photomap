@@ -1,9 +1,9 @@
 /* 照片地图主逻辑：Leaflet 平面地图 + globe.gl 地球仪，按钮切换 */
 
 let photos = [];
-let map = null;        // Leaflet（首次切换到 2D 时才初始化）
-let globe = null;      // globe.gl（默认视图）
-let showingGlobe = true;
+let map = null;        // Leaflet（默认视图）
+let globe = null;      // globe.gl（首次切换到 3D 时才初始化）
+let showingGlobe = false;
 let countriesGeo = null;   // 国家边界 GeoJSON（仅用于国家跳转的范围计算）
 
 const $ = (id) => document.getElementById(id);
@@ -33,7 +33,7 @@ async function init() {
   $('gz-in').addEventListener('click', () => zoomGlobe(0.6));
   $('gz-out').addEventListener('click', () => zoomGlobe(1 / 0.6));
 
-  initGlobe();
+  initMap();
 
   $('toggle-view').addEventListener('click', toggleView);
   $('lightbox-close').addEventListener('click', closeLightbox);
@@ -133,7 +133,15 @@ function flyToCountry(name) {
 
 /* ---------- 平面地图 (Leaflet) ---------- */
 function initMap() {
-  map = L.map('map', { worldCopyJump: true, zoomControl: false }).setView([25, 115], 3);
+  // 最小缩放随容器高度算出，保证世界地图始终铺满、上下不留黑边
+  const el = $('map');
+  const minZoom = Math.max(2, Math.ceil(Math.log2(Math.max(el.clientHeight, 256) / 256)));
+  map = L.map('map', {
+    worldCopyJump: true, zoomControl: false, minZoom,
+    // 纵向钳在世界地图范围内（消除上下黑边），横向仍可跨日期变更线平移
+    maxBounds: [[-85.06, -36000], [85.06, 36000]],
+    maxBoundsViscosity: 1.0
+  }).setView([25, 115], Math.max(3, minZoom));
   L.control.zoom({ position: 'topright' }).addTo(map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
