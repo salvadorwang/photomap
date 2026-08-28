@@ -79,8 +79,7 @@ function initGlobe() {
       return img;
     });
 
-  globe.controls().autoRotate = true;
-  globe.controls().autoRotateSpeed = 0.6;
+  globe.controls().autoRotate = false;   // 不自动旋转，仅手动拖动
 
   if (photos.length > 0) {
     globe.pointOfView({ lat: photos[0].lat, lng: photos[0].lng, altitude: 2 }, 1500);
