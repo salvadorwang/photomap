@@ -1,5 +1,49 @@
 [
   {
+    "file": "photos/display/Chicago.jpg",
+    "original": "photos/Chicago.HEIC",
+    "thumb": "photos/thumbs/Chicago.jpg",
+    "lat": 41.884572,
+    "lng": -87.623764,
+    "date": "2026-08-28",
+    "location": "Chicago",
+    "location_en": null,
+    "caption": ""
+  },
+  {
+    "file": "photos/display/横浜町.jpg",
+    "original": "photos/横浜町.JPG",
+    "thumb": "photos/thumbs/横浜町.jpg",
+    "lat": 41.083088,
+    "lng": 141.247822,
+    "date": "2026-05-04",
+    "location": "横浜町",
+    "location_en": "Yokohama, Aomori Prefecture",
+    "caption": ""
+  },
+  {
+    "file": "photos/display/小岩井農場.jpg",
+    "original": "photos/小岩井農場.JPG",
+    "thumb": "photos/thumbs/小岩井農場.jpg",
+    "lat": 39.752786,
+    "lng": 141.019067,
+    "date": "2026-05-02",
+    "location": "小岩井農場",
+    "location_en": "Shizukuishi, Iwate Prefecture",
+    "caption": ""
+  },
+  {
+    "file": "photos/display/大河原町.jpg",
+    "original": "photos/大河原町.JPG",
+    "thumb": "photos/thumbs/大河原町.jpg",
+    "lat": 38.049267,
+    "lng": 140.730954,
+    "date": "2026-04-10",
+    "location": "大河原町",
+    "location_en": "Ogawara, Miyagi Prefecture",
+    "caption": ""
+  },
+  {
     "file": "photos/display/山寺.jpg",
     "original": "photos/山寺.HEIC",
     "thumb": "photos/thumbs/山寺.jpg",
@@ -8,6 +52,17 @@
     "date": "2025-12-30",
     "location": "山寺",
     "location_en": "Yamagata, Yamagata Prefecture",
+    "caption": ""
+  },
+  {
+    "file": "photos/display/秋保.jpg",
+    "original": "photos/秋保.HEIC",
+    "thumb": "photos/thumbs/秋保.jpg",
+    "lat": 38.272828,
+    "lng": 140.551269,
+    "date": "2025-12-30",
+    "location": "秋保",
+    "location_en": "Sendai, Miyagi Prefecture",
     "caption": ""
   },
   {
@@ -41,6 +96,39 @@
     "date": "2025-02-24",
     "location": "男木島",
     "location_en": "Takamatsu, Kagawa Prefecture",
+    "caption": ""
+  },
+  {
+    "file": "photos/display/Puebla.jpg",
+    "original": "photos/Puebla.JPG",
+    "thumb": "photos/thumbs/Puebla.jpg",
+    "lat": 19.0414,
+    "lng": -98.2063,
+    "date": "2017-06-13",
+    "location": "Puebla",
+    "location_en": null,
+    "caption": ""
+  },
+  {
+    "file": "photos/display/Chichen Itzá.jpg",
+    "original": "photos/Chichen Itzá.JPG",
+    "thumb": "photos/thumbs/Chichen Itzá.jpg",
+    "lat": 20.682876,
+    "lng": -88.568718,
+    "date": "2017-01-26",
+    "location": "Chichen Itzá",
+    "location_en": "Tinum",
+    "caption": ""
+  },
+  {
+    "file": "photos/display/Teotihuacán.jpg",
+    "original": "photos/Teotihuacán.JPG",
+    "thumb": "photos/thumbs/Teotihuacán.jpg",
+    "lat": 19.693357,
+    "lng": -98.883126,
+    "date": "2017-01-06",
+    "location": "Teotihuacán",
+    "location_en": "State of Mexico",
     "caption": ""
   }
 ]

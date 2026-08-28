@@ -35,5 +35,35 @@
   "en:35.3183,139.5500": "Kamakura, Kanagawa Prefecture",
   "en:33.5571,130.1969": "Itoshima, Fukuoka Prefecture",
   "en:38.3138,140.4348": "Yamagata, Yamagata Prefecture",
-  "en:35.3000,139.4800": "Fujisawa, Kanagawa Prefecture"
+  "en:35.3000,139.4800": "Fujisawa, Kanagawa Prefecture",
+  "Chichen Itzá": [
+    20.682876,
+    -88.568718
+  ],
+  "en:20.6829,-88.5687": "Tinum",
+  "Puebla": [
+    18.833333,
+    -98.0
+  ],
+  "Teotihuacán": [
+    19.693357,
+    -98.883126
+  ],
+  "en:19.6934,-98.8831": "State of Mexico",
+  "大河原町": [
+    38.049267,
+    140.730954
+  ],
+  "en:38.0493,140.7310": "Ogawara, Miyagi Prefecture",
+  "小岩井農場": [
+    39.752786,
+    141.019067
+  ],
+  "en:39.7528,141.0191": "Shizukuishi, Iwate Prefecture",
+  "横浜町": [
+    41.083088,
+    141.247822
+  ],
+  "en:41.0831,141.2478": "Yokohama, Aomori Prefecture",
+  "en:38.2728,140.5513": "Sendai, Miyagi Prefecture"
 }

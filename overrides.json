@@ -1,5 +1,19 @@
 {
   "_说明": "在这里为某张照片手动指定/修正坐标和信息。键 = 文件名。lat/lng 必填，location/location_en/date/caption 可选（会覆盖自动解析的结果）。下面 _example 开头的条目仅作示例，不会生效。",
+  "Puebla.JPG": {
+    "lat": 19.0414,
+    "lng": -98.2063
+  },
+  "Chichen Itzá.JPG": {
+    "lat": 20.6829,
+    "lng": -88.5687,
+    "location_en": "Chichen Itza, Yucatán"
+  },
+  "Teotihuacán.JPG": {
+    "lat": 19.6934,
+    "lng": -98.8831,
+    "location_en": "Teotihuacan"
+  },
   "糸島.JPG": {
     "lat": 33.5571,
     "lng": 130.1969
