@@ -43,6 +43,13 @@ body { display: flex; flex-direction: column; }
   object-fit: cover; cursor: pointer;
 }
 
+/* 嵌入模式（主站 iframe）：隐藏标题栏，切换按钮悬浮在地图右上角 */
+body.embedded .topbar { display: none; }
+body.embedded #toggle-view {
+  position: absolute; top: 12px; right: 12px; z-index: 1100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+
 /* 大图弹窗 */
 #lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
 #lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.8); }

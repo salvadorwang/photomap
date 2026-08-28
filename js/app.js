@@ -10,6 +10,11 @@ const $ = (id) => document.getElementById(id);
 init();
 
 async function init() {
+  // 被主站 iframe 嵌入时隐藏自己的标题栏（保留切换按钮，挪到地图角上）
+  if (new URLSearchParams(location.search).has('embed')) {
+    document.body.classList.add('embedded');
+    document.getElementById('stage').appendChild(document.getElementById('toggle-view'));
+  }
   try {
     const res = await fetch('photos.json?t=' + Date.now());
     photos = await res.json();
