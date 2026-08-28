@@ -14,10 +14,10 @@ async function init() {
     const res = await fetch('photos.json?t=' + Date.now());
     photos = await res.json();
   } catch (e) {
-    console.error('读取 photos.json 失败', e);
+    console.error('Failed to load photos.json', e);
     photos = [];
   }
-  $('photo-count').textContent = `${photos.length} 张照片`;
+  $('photo-count').textContent = `${photos.length} photo${photos.length === 1 ? '' : 's'}`;
 
   initMap();
 
@@ -31,14 +31,14 @@ async function init() {
 function initMap() {
   map = L.map('map', { worldCopyJump: true }).setView([25, 115], 3);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 贡献者',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(map);
 
   photos.forEach((p) => {
     const icon = L.divIcon({
       className: '',
-      html: `<img class="photo-marker" src="${p.thumb}" width="48" height="48" alt="${p.location}">`,
+      html: `<img class="photo-marker" src="${p.thumb}" width="48" height="48" title="${displayLocation(p)}" alt="${displayLocation(p)}">`,
       iconSize: [48, 48],
       iconAnchor: [24, 24]
     });
@@ -68,7 +68,7 @@ function initGlobe() {
       const img = document.createElement('img');
       img.src = p.thumb;
       img.className = 'globe-thumb';
-      img.title = p.location;
+      img.title = displayLocation(p);
       img.style.pointerEvents = 'auto';
       img.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(p); });
       return img;
@@ -95,7 +95,7 @@ function toggleView() {
   showingGlobe = !showingGlobe;
   $('map').classList.toggle('hidden', showingGlobe);
   $('globe').classList.toggle('hidden', !showingGlobe);
-  $('toggle-view').textContent = showingGlobe ? '🗺️ 切换平面地图' : '🌍 切换地球仪';
+  $('toggle-view').textContent = showingGlobe ? '🗺️ Map View' : '🌍 Globe View';
 
   if (showingGlobe) {
     if (!globe) initGlobe();
@@ -106,11 +106,20 @@ function toggleView() {
 }
 
 /* ---------- 大图弹窗 ---------- */
+/* 地点显示：原名 (English)；原名本身是英文或两者相同时只显示原名 */
+function displayLocation(p) {
+  const orig = p.location || '';
+  const en = p.location_en || '';
+  if (!orig) return en || 'Unknown location';
+  if (!en || en.toLowerCase() === orig.toLowerCase()) return orig;
+  return `${orig} (${en})`;
+}
+
 function openLightbox(p) {
   $('lightbox-img').src = p.file;
-  $('lb-location').textContent = p.location || '未知地点';
+  $('lb-location').textContent = displayLocation(p);
   $('lb-caption').textContent = p.caption || '';
-  $('lb-date').textContent = p.date ? `📅 ${p.date}` : '日期未知';
+  $('lb-date').textContent = p.date ? `📅 ${p.date}` : 'Date unknown';
   $('lb-coords').textContent = `📍 ${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`;
   $('lightbox').classList.remove('hidden');
 }

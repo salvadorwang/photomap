@@ -103,26 +103,66 @@ def exif_date(exif):
     return None
 
 
+def nominatim_search(query, lang=None):
+    """调用 Nominatim 搜索，返回第一个结果 dict 或 None。"""
+    url = ("https://nominatim.openstreetmap.org/search?format=json&limit=1&q="
+           + urllib.parse.quote(query))
+    if lang:
+        url += "&accept-language=" + lang
+    req = urllib.request.Request(url, headers={"User-Agent": "photomap-site/1.0"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        results = json.loads(r.read().decode())
+    time.sleep(1.1)  # Nominatim 要求每秒最多 1 次请求
+    return results[0] if results else None
+
+
 def geocode(name, cache):
     """地名 -> (lat, lng)，结果缓存到 geocache.json。"""
     if name in cache:
         return tuple(cache[name]) if cache[name] else None
-    url = ("https://nominatim.openstreetmap.org/search?format=json&limit=1&q="
-           + urllib.parse.quote(name))
-    req = urllib.request.Request(url, headers={"User-Agent": "photomap-site/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            results = json.loads(r.read().decode())
-        time.sleep(1.1)  # Nominatim 要求每秒最多 1 次请求
+        result = nominatim_search(name)
     except Exception as e:
         print(f"  地理编码请求失败 ({name}): {e}", file=sys.stderr)
         return None
-    if results:
-        coords = (round(float(results[0]["lat"]), 6), round(float(results[0]["lon"]), 6))
+    if result:
+        coords = (round(float(result["lat"]), 6), round(float(result["lon"]), 6))
         cache[name] = list(coords)
         return coords
     cache[name] = None  # 缓存失败结果，避免反复请求
     return None
+
+
+def english_name(location, coords, cache):
+    """坐标 -> 英文地名（反向地理编码）。原名为纯 ASCII 时视为已是英文，返回 None。"""
+    if not location or location.isascii():
+        return None
+    key = f"en:{coords[0]:.4f},{coords[1]:.4f}"
+    if key in cache:
+        return cache[key]
+    url = (f"https://nominatim.openstreetmap.org/reverse?format=json"
+           f"&lat={coords[0]}&lon={coords[1]}&zoom=14&accept-language=en")
+    req = urllib.request.Request(url, headers={"User-Agent": "photomap-site/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            result = json.loads(r.read().decode())
+        time.sleep(1.1)
+    except Exception as e:
+        print(f"  英文地名请求失败 ({location}): {e}", file=sys.stderr)
+        return None
+    # 取市级 + 省/都道府县级英文名，去重；均为 ASCII 时才采用
+    addr = result.get("address", {})
+    parts = []
+    for keys in (("city", "town", "village", "municipality", "county"),
+                 ("state", "province", "prefecture", "region")):
+        for k in keys:
+            v = addr.get(k)
+            if v and v.isascii() and v not in parts:
+                parts.append(v)
+                break
+    en = ", ".join(parts) if parts else None
+    cache[key] = en
+    return en
 
 
 def make_thumb(src, dst):
@@ -173,10 +213,18 @@ def main():
             continue
 
         # overrides 也可以覆盖文字信息
+        loc_en = None
         if ov:
             location = ov.get("location", location)
             date = ov.get("date", date)
             caption = ov.get("caption", caption)
+            loc_en = ov.get("location_en")
+
+        # 地点英文名：overrides 优先，否则从 Nominatim 获取（原名已是英文则为 None）
+        if loc_en is None:
+            loc_en = english_name(location, coords, cache)
+            if loc_en:
+                print(f"  英文地名: {loc_en}")
 
         thumb = THUMBS_DIR / (f.stem + ".jpg")
         make_thumb(f, thumb)
@@ -188,6 +236,7 @@ def main():
             "lng": coords[1],
             "date": date,
             "location": location,
+            "location_en": loc_en,
             "caption": caption,
         })
 
