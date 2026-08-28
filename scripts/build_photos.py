@@ -29,6 +29,7 @@ import re
 import subprocess
 import sys
 import time
+import unicodedata
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -214,7 +215,9 @@ def resize_to(src, dst, max_side, quality):
 def main():
     THUMBS_DIR.mkdir(parents=True, exist_ok=True)
     DISPLAY_DIR.mkdir(parents=True, exist_ok=True)
-    overrides = load_json(OVERRIDES_FILE, {})
+    # 文件名统一 NFC 规范化：macOS 文件名是 NFD，直接比较会匹配不上带重音符的键
+    overrides = {unicodedata.normalize("NFC", k): v
+                 for k, v in load_json(OVERRIDES_FILE, {}).items()}
     cache = load_json(GEOCACHE_FILE, {})
     # 上次生成的日期，用于保持稳定（键用原图路径）
     prev_dates = {(e.get("original") or e["file"]): e.get("date")
@@ -229,7 +232,7 @@ def main():
                   f"(pip install pillow-heif)", file=sys.stderr)
             continue
         print(f"处理 {f.name} ...")
-        location, date, caption = parse_filename(f.stem)
+        location, date, caption = parse_filename(unicodedata.normalize("NFC", f.stem))
 
         with Image.open(f) as img:
             exif = exif_data(img)
@@ -240,7 +243,7 @@ def main():
 
         # 坐标：overrides > EXIF GPS > 地名地理编码
         coords = None
-        ov = overrides.get(f.name)
+        ov = overrides.get(unicodedata.normalize("NFC", f.name))
         if ov and "lat" in ov and "lng" in ov:
             coords = (ov["lat"], ov["lng"])
             print("  坐标来自 overrides.json")

@@ -113,22 +113,22 @@
     "file": "photos/display/Chichen Itzá.jpg",
     "original": "photos/Chichen Itzá.JPG",
     "thumb": "photos/thumbs/Chichen Itzá.jpg",
-    "lat": 20.682876,
-    "lng": -88.568718,
+    "lat": 20.6829,
+    "lng": -88.5687,
     "date": "2017-01-26",
-    "location": "Chichen Itzá",
-    "location_en": "Tinum",
+    "location": "Chichen Itzá",
+    "location_en": "Chichen Itza, Yucatán",
     "caption": ""
   },
   {
     "file": "photos/display/Teotihuacán.jpg",
     "original": "photos/Teotihuacán.JPG",
     "thumb": "photos/thumbs/Teotihuacán.jpg",
-    "lat": 19.693357,
-    "lng": -98.883126,
+    "lat": 19.6934,
+    "lng": -98.8831,
     "date": "2017-01-06",
-    "location": "Teotihuacán",
-    "location_en": "State of Mexico",
+    "location": "Teotihuacán",
+    "location_en": "Teotihuacan",
     "caption": ""
   }
 ]
