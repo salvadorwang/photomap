@@ -34,16 +34,18 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
-from PIL import Image, ExifTags
+from PIL import Image, ImageOps, ExifTags
 
 ROOT = Path(__file__).resolve().parent.parent
 PHOTOS_DIR = ROOT / "photos"
 THUMBS_DIR = PHOTOS_DIR / "thumbs"
+DISPLAY_DIR = PHOTOS_DIR / "display"
 OUTPUT_JSON = ROOT / "photos.json"
 OVERRIDES_FILE = ROOT / "overrides.json"
 GEOCACHE_FILE = ROOT / "scripts" / "geocache.json"
 
 THUMB_SIZE = 128          # 缩略图最长边像素
+DISPLAY_SIZE = 2000       # 网页展示大图最长边像素（原图太大，直接加载很慢）
 EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -184,21 +186,24 @@ def english_name(location, coords, cache):
     return en
 
 
-def make_thumb(src, dst):
+def resize_to(src, dst, max_side, quality):
     if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
         return
     with Image.open(src) as img:
+        img = ImageOps.exif_transpose(img)  # 按 EXIF 方向摆正，避免竖拍照片横躺
         img = img.convert("RGB")
-        img.thumbnail((THUMB_SIZE, THUMB_SIZE))
-        img.save(dst, "JPEG", quality=75)
+        img.thumbnail((max_side, max_side))
+        img.save(dst, "JPEG", quality=quality)
 
 
 def main():
     THUMBS_DIR.mkdir(parents=True, exist_ok=True)
+    DISPLAY_DIR.mkdir(parents=True, exist_ok=True)
     overrides = load_json(OVERRIDES_FILE, {})
     cache = load_json(GEOCACHE_FILE, {})
-    # 上次生成的日期，用于保持稳定
-    prev_dates = {e["file"]: e.get("date") for e in load_json(OUTPUT_JSON, [])}
+    # 上次生成的日期，用于保持稳定（键用原图路径）
+    prev_dates = {(e.get("original") or e["file"]): e.get("date")
+                  for e in load_json(OUTPUT_JSON, [])}
 
     entries = []
     files = sorted(p for p in PHOTOS_DIR.iterdir()
@@ -248,10 +253,13 @@ def main():
                 print(f"  英文地名: {loc_en}")
 
         thumb = THUMBS_DIR / (f.stem + ".jpg")
-        make_thumb(f, thumb)
+        resize_to(f, thumb, THUMB_SIZE, 75)
+        display = DISPLAY_DIR / (f.stem + ".jpg")
+        resize_to(f, display, DISPLAY_SIZE, 82)
 
         entries.append({
-            "file": f"photos/{f.name}",
+            "file": f"photos/display/{display.name}",
+            "original": f"photos/{f.name}",
             "thumb": f"photos/thumbs/{thumb.name}",
             "lat": coords[0],
             "lng": coords[1],
