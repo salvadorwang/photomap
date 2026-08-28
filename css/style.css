@@ -27,21 +27,38 @@ body { display: flex; flex-direction: column; }
 #globe { background: #000; overflow: hidden; }
 .hidden { display: none !important; }
 
-/* 地图上的缩略图标记 */
-.photo-marker {
-  border: 2px solid #fff; border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.5);
-  object-fit: cover; cursor: pointer; background: #444;
-  transition: transform .12s;
-}
-.photo-marker:hover { transform: scale(1.15); z-index: 999 !important; }
+/* 照片标记：零尺寸锚点固定在真实地理位置，缩略图可偏移，引线连回锚点 */
+.pm-anchor { position: absolute; width: 0; height: 0; overflow: visible; }
 
-/* 地球仪上的缩略图 */
-.globe-thumb {
-  width: 48px; height: 48px; border: 2px solid #fff; border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.6);
-  object-fit: cover; cursor: pointer;
+.pm-thumb {
+  position: absolute; left: 0; top: 0;
+  width: 48px; height: 48px;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff; border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.55);
+  object-fit: cover; cursor: pointer; background: #444;
+  pointer-events: auto;
 }
+.pm-thumb:hover { filter: brightness(1.08); border-color: #ffe680; }
+
+/* 引线：细线 + 反色描边，随底图明暗取色，两种视图下都清晰 */
+.pm-leader {
+  position: absolute; left: -210px; top: -210px;
+  pointer-events: none; overflow: visible;
+}
+.pm-halo  { fill: none; stroke-width: 4; stroke-linecap: round; }
+.pm-line  { fill: none; stroke-width: 1.7; stroke-linecap: round; }
+.pm-arrow { stroke-width: 1; stroke-linejoin: round; }
+
+/* 浅色平面地图：深色线 + 白描边 */
+#map .pm-halo  { stroke: rgba(255,255,255,.92); }
+#map .pm-line  { stroke: #1f2328; }
+#map .pm-arrow { fill: #1f2328; stroke: rgba(255,255,255,.92); }
+
+/* 深色地球：白线 + 深描边 */
+#globe .pm-halo  { stroke: rgba(0,0,0,.55); }
+#globe .pm-line  { stroke: #fff; }
+#globe .pm-arrow { fill: #fff; stroke: rgba(0,0,0,.55); }
 
 /* 国家下拉菜单（两种视图共用，左上角） */
 #country-select {
