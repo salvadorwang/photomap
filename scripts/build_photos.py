@@ -4,6 +4,7 @@
 
 文件名约定：
     地点.jpg               例如: 男木岛.jpg
+    地点 日期.jpg           例如: 巴塞罗那 2015-09.jpg（日期可写到年 / 年月 / 年月日）
     同一地点多张照片时加数字后缀区分，会自动忽略:
     男木岛2.jpg / 男木岛_2.jpg / 男木岛 (2).jpg
     （也兼容旧格式 地点_YYYY-MM-DD_说明.jpg，文件名中的日期/说明优先生效）
@@ -56,6 +57,8 @@ THUMB_SIZE = 128          # 缩略图最长边像素
 DISPLAY_SIZE = 1920       # 网页展示大图最长边像素（原图太大，直接加载很慢）
 EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# 文件名末尾的日期: 2015 / 2015-09 / 2015-09-20
+TRAILING_DATE_RE = re.compile(r"[\s_](\d{4}(?:-\d{2}){0,2})$")
 
 
 def load_json(path, default):
@@ -69,14 +72,19 @@ def load_json(path, default):
 
 def parse_filename(stem):
     """从文件名解析 (地点, 日期, 说明)。"""
+    date = None
+    # 末尾带日期的写法: 巴塞罗那 2015-09 / 巴塞罗那 2015-09-20 / 巴塞罗那 2015
+    m = TRAILING_DATE_RE.search(stem)
+    if m:
+        date = m.group(1)
+        stem = stem[:m.start()].strip()
     # 去掉同名照片的数字后缀: 男木岛2 / 男木岛_2 / 男木岛 (2) / 男木岛-2
     stem = re.sub(r"[\s_\-]*\(?\d+\)?$", "", stem).strip() or stem
     parts = stem.split("_")
     location = parts[0].strip()
-    date = None
     caption = ""
     rest = parts[1:]
-    if rest and DATE_RE.match(rest[0]):
+    if date is None and rest and DATE_RE.match(rest[0]):
         date = rest[0]
         rest = rest[1:]
     caption = " ".join(rest).strip()

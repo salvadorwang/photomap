@@ -168,6 +168,18 @@
     "caption": ""
   },
   {
+    "file": "photos/洛阳 2025-03.jpg",
+    "original": "photos/洛阳 2025-03.jpg",
+    "thumb": "photos/thumbs/洛阳 2025-03.jpg",
+    "lat": 34.619654,
+    "lng": 112.447705,
+    "date": "2025-03",
+    "location": "洛阳",
+    "location_en": "Luolong District, Henan",
+    "country": "China",
+    "caption": ""
+  },
+  {
     "file": "photos/和歌山.JPG",
     "original": "photos/和歌山.JPG",
     "thumb": "photos/thumbs/和歌山.jpg",
@@ -228,6 +240,18 @@
     "caption": ""
   },
   {
+    "file": "photos/札幌 2025-01.jpg",
+    "original": "photos/札幌 2025-01.jpg",
+    "thumb": "photos/thumbs/札幌 2025-01.jpg",
+    "lat": 43.068636,
+    "lng": 141.350922,
+    "date": "2025-01",
+    "location": "札幌",
+    "location_en": "Sapporo, Hokkaido Prefecture",
+    "country": "Japan",
+    "caption": ""
+  },
+  {
     "file": "photos/函館.jpg",
     "original": "photos/函館.jpg",
     "thumb": "photos/thumbs/函館.jpg",
@@ -248,6 +272,18 @@
     "date": "2024-12-09",
     "location": "京都",
     "location_en": "Kyoto, Kyoto Prefecture",
+    "country": "Japan",
+    "caption": ""
+  },
+  {
+    "file": "photos/大阪 2024-12.jpg",
+    "original": "photos/大阪 2024-12.jpg",
+    "thumb": "photos/thumbs/大阪 2024-12.jpg",
+    "lat": 34.693757,
+    "lng": 135.501454,
+    "date": "2024-12",
+    "location": "大阪",
+    "location_en": "Osaka, Osaka Prefecture",
     "country": "Japan",
     "caption": ""
   },
@@ -284,6 +320,18 @@
     "date": "2024-10-25",
     "location": "弘前",
     "location_en": "Hirosaki, Aomori Prefecture",
+    "country": "Japan",
+    "caption": ""
+  },
+  {
+    "file": "photos/松島 2024-10.jpg",
+    "original": "photos/松島 2024-10.jpg",
+    "thumb": "photos/thumbs/松島 2024-10.jpg",
+    "lat": 38.367065,
+    "lng": 141.071251,
+    "date": "2024-10",
+    "location": "松島",
+    "location_en": "Matsushima, Miyagi Prefecture",
     "country": "Japan",
     "caption": ""
   },
@@ -900,6 +948,18 @@
     "caption": ""
   },
   {
+    "file": "photos/Cancún 2015-12.JPG",
+    "original": "photos/Cancún 2015-12.JPG",
+    "thumb": "photos/thumbs/Cancún 2015-12.jpg",
+    "lat": 21.152747,
+    "lng": -86.842576,
+    "date": "2015-12",
+    "location": "Cancún",
+    "location_en": "Quintana Roo",
+    "country": "Mexico",
+    "caption": ""
+  },
+  {
     "file": "photos/Burano.JPG",
     "original": "photos/Burano.JPG",
     "thumb": "photos/thumbs/Burano.jpg",
@@ -921,6 +981,54 @@
     "location": "Venezia",
     "location_en": null,
     "country": "Italy",
+    "caption": ""
+  },
+  {
+    "file": "photos/Barcelona 2015-09.jpg",
+    "original": "photos/Barcelona 2015-09.jpg",
+    "thumb": "photos/thumbs/Barcelona 2015-09.jpg",
+    "lat": 41.38258,
+    "lng": 2.177073,
+    "date": "2015-09",
+    "location": "Barcelona",
+    "location_en": null,
+    "country": "Spain",
+    "caption": ""
+  },
+  {
+    "file": "photos/Granada 2015-09.jpg",
+    "original": "photos/Granada 2015-09.jpg",
+    "thumb": "photos/thumbs/Granada 2015-09.jpg",
+    "lat": 37.173499,
+    "lng": -3.599534,
+    "date": "2015-09",
+    "location": "Granada",
+    "location_en": null,
+    "country": "Spain",
+    "caption": ""
+  },
+  {
+    "file": "photos/Madrid 2015-09.jpg",
+    "original": "photos/Madrid 2015-09.jpg",
+    "thumb": "photos/thumbs/Madrid 2015-09.jpg",
+    "lat": 40.416782,
+    "lng": -3.703507,
+    "date": "2015-09",
+    "location": "Madrid",
+    "location_en": null,
+    "country": "Spain",
+    "caption": ""
+  },
+  {
+    "file": "photos/Valencia 2015-09.JPG",
+    "original": "photos/Valencia 2015-09.JPG",
+    "thumb": "photos/thumbs/Valencia 2015-09.jpg",
+    "lat": 39.469707,
+    "lng": -0.376335,
+    "date": "2015-09",
+    "location": "Valencia",
+    "location_en": null,
+    "country": "Spain",
     "caption": ""
   },
   {
@@ -1056,6 +1164,18 @@
     "caption": ""
   },
   {
+    "file": "photos/New York 2015-03.jpg",
+    "original": "photos/New York 2015-03.jpg",
+    "thumb": "photos/thumbs/New York 2015-03.jpg",
+    "lat": 40.712728,
+    "lng": -74.006015,
+    "date": "2015-03",
+    "location": "New York",
+    "location_en": null,
+    "country": "United States",
+    "caption": ""
+  },
+  {
     "file": "photos/Coyoacán.jpg",
     "original": "photos/Coyoacán.jpg",
     "thumb": "photos/thumbs/Coyoacán.jpg",
@@ -1065,6 +1185,102 @@
     "location": "Coyoacán",
     "location_en": "Mexico City",
     "country": "Mexico",
+    "caption": ""
+  },
+  {
+    "file": "photos/Cristo Redentor 2015-02.jpg",
+    "original": "photos/Cristo Redentor 2015-02.jpg",
+    "thumb": "photos/thumbs/Cristo Redentor 2015-02.jpg",
+    "lat": -22.951917,
+    "lng": -43.210459,
+    "date": "2015-02",
+    "location": "Cristo Redentor",
+    "location_en": null,
+    "country": "Brazil",
+    "caption": ""
+  },
+  {
+    "file": "photos/Reserva Laguna Nimez 2015-01.jpg",
+    "original": "photos/Reserva Laguna Nimez 2015-01.jpg",
+    "thumb": "photos/thumbs/Reserva Laguna Nimez 2015-01.jpg",
+    "lat": -50.324987,
+    "lng": -72.268676,
+    "date": "2015-01",
+    "location": "Reserva Laguna Nimez",
+    "location_en": null,
+    "country": "Argentina",
+    "caption": ""
+  },
+  {
+    "file": "photos/Disney Land Orlando 2014-12.jpg",
+    "original": "photos/Disney Land Orlando 2014-12.jpg",
+    "thumb": "photos/thumbs/Disney Land Orlando 2014-12.jpg",
+    "lat": 28.3852,
+    "lng": -81.5639,
+    "date": "2014-12",
+    "location": "Walt Disney World, Orlando",
+    "location_en": null,
+    "country": "United States",
+    "caption": ""
+  },
+  {
+    "file": "photos/Key West 2014-12.jpg",
+    "original": "photos/Key West 2014-12.jpg",
+    "thumb": "photos/thumbs/Key West 2014-12.jpg",
+    "lat": 24.554826,
+    "lng": -81.802072,
+    "date": "2014-12",
+    "location": "Key West",
+    "location_en": null,
+    "country": "United States",
+    "caption": ""
+  },
+  {
+    "file": "photos/Miami 2014-12.jpg",
+    "original": "photos/Miami 2014-12.jpg",
+    "thumb": "photos/thumbs/Miami 2014-12.jpg",
+    "lat": 25.774157,
+    "lng": -80.193597,
+    "date": "2014-12",
+    "location": "Miami",
+    "location_en": null,
+    "country": "United States",
+    "caption": ""
+  },
+  {
+    "file": "photos/人民大会堂 2014-09.jpg",
+    "original": "photos/人民大会堂 2014-09.jpg",
+    "thumb": "photos/thumbs/人民大会堂 2014-09.jpg",
+    "lat": 39.903462,
+    "lng": 116.387149,
+    "date": "2014-09",
+    "location": "人民大会堂",
+    "location_en": "Xicheng District",
+    "country": "China",
+    "caption": ""
+  },
+  {
+    "file": "photos/Los Angeles 2013-04.jpg",
+    "original": "photos/Los Angeles 2013-04.jpg",
+    "thumb": "photos/thumbs/Los Angeles 2013-04.jpg",
+    "lat": 34.053691,
+    "lng": -118.242766,
+    "date": "2013-04",
+    "location": "Los Angeles",
+    "location_en": null,
+    "country": "United States",
+    "caption": ""
+  },
+  {
+    "file": "photos/峨眉山 2012-06.jpg",
+    "original": "photos/峨眉山 2012-06.jpg",
+    "thumb": "photos/thumbs/峨眉山 2012-06.jpg",
+    "lat": 29.522665,
+    "lng": 103.336864,
+    "date": "2012-06",
+    "location": "峨眉山",
+    "location_en": "Emeishan City, Sichuan",
+    "country": "China",
     "caption": ""
   },
   {

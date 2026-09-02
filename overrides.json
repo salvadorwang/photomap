@@ -37,5 +37,11 @@
     "location": "奥入瀬渓流",
     "location_en": "Towada, Aomori Prefecture",
     "country": "Japan"
+  },
+  "Disney Land Orlando 2014-12.jpg": {
+    "lat": 28.3852,
+    "lng": -81.5639,
+    "location": "Walt Disney World, Orlando",
+    "country": "United States"
   }
 }

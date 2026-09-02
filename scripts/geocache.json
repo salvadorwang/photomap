@@ -507,5 +507,98 @@
     120.377766
   ],
   "en:36.0663,120.3778": "Shinan District, Shandong",
-  "country:36.07,120.38": "China"
+  "country:36.07,120.38": "China",
+  "Barcelona": [
+    41.38258,
+    2.177073
+  ],
+  "country:41.38,2.18": "Spain",
+  "Cancún": [
+    21.152747,
+    -86.842576
+  ],
+  "en:21.1527,-86.8426": "Quintana Roo",
+  "country:21.15,-86.84": "Mexico",
+  "Cristo Redentor": [
+    -22.951917,
+    -43.210459
+  ],
+  "country:-22.95,-43.21": "Brazil",
+  "Disney Land Orlando": null,
+  "Granada": [
+    37.173499,
+    -3.599534
+  ],
+  "country:37.17,-3.60": "Spain",
+  "Key West": [
+    24.554826,
+    -81.802072
+  ],
+  "country:24.55,-81.80": "United States",
+  "Los Angeles": [
+    34.053691,
+    -118.242766
+  ],
+  "country:34.05,-118.24": "United States",
+  "Madrid": [
+    40.416782,
+    -3.703507
+  ],
+  "country:40.42,-3.70": "Spain",
+  "Miami": [
+    25.774157,
+    -80.193597
+  ],
+  "country:25.77,-80.19": "United States",
+  "New York": [
+    40.712728,
+    -74.006015
+  ],
+  "country:40.71,-74.01": "United States",
+  "Reserva Laguna Nimez": [
+    -50.324987,
+    -72.268676
+  ],
+  "country:-50.32,-72.27": "Argentina",
+  "Valencia": [
+    39.469707,
+    -0.376335
+  ],
+  "country:39.47,-0.38": "Spain",
+  "人民大会堂": [
+    39.903462,
+    116.387149
+  ],
+  "en:39.9035,116.3871": "Xicheng District",
+  "country:39.90,116.39": "China",
+  "大阪": [
+    34.693757,
+    135.501454
+  ],
+  "en:34.6938,135.5015": "Osaka, Osaka Prefecture",
+  "country:34.69,135.50": "Japan",
+  "峨眉山": [
+    29.522665,
+    103.336864
+  ],
+  "en:29.5227,103.3369": "Emeishan City, Sichuan",
+  "country:29.52,103.34": "China",
+  "札幌": [
+    43.068636,
+    141.350922
+  ],
+  "en:43.0686,141.3509": "Sapporo, Hokkaido Prefecture",
+  "country:43.07,141.35": "Japan",
+  "松島": [
+    38.367065,
+    141.071251
+  ],
+  "en:38.3671,141.0713": "Matsushima, Miyagi Prefecture",
+  "country:38.37,141.07": "Japan",
+  "洛阳": [
+    34.619654,
+    112.447705
+  ],
+  "en:34.6197,112.4477": "Luolong District, Henan",
+  "country:34.62,112.45": "China"
 }
