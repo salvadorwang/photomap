@@ -53,7 +53,7 @@ OVERRIDES_FILE = ROOT / "overrides.json"
 GEOCACHE_FILE = ROOT / "scripts" / "geocache.json"
 
 THUMB_SIZE = 128          # 缩略图最长边像素
-DISPLAY_SIZE = 2000       # 网页展示大图最长边像素（原图太大，直接加载很慢）
+DISPLAY_SIZE = 1920       # 网页展示大图最长边像素（原图太大，直接加载很慢）
 EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -305,11 +305,21 @@ def main():
 
         thumb = THUMBS_DIR / (f.stem + ".jpg")
         resize_to(f, thumb, THUMB_SIZE, 75)
-        display = DISPLAY_DIR / (f.stem + ".jpg")
-        resize_to(f, display, DISPLAY_SIZE, 82)
+
+        # 原图已经是浏览器能直接显示的尺寸时就不再另存展示版，省一半空间
+        with Image.open(f) as probe:
+            long_side = max(probe.size)
+        needs_display = (f.suffix.lower() in {".heic", ".heif", ".png"}
+                         or long_side > DISPLAY_SIZE)
+        if needs_display:
+            display = DISPLAY_DIR / (f.stem + ".jpg")
+            resize_to(f, display, DISPLAY_SIZE, 82)
+            display_path = f"photos/display/{display.name}"
+        else:
+            display_path = f"photos/{f.name}"
 
         entries.append({
-            "file": nfc(f"photos/display/{display.name}"),
+            "file": nfc(display_path),
             "original": nfc(f"photos/{f.name}"),
             "thumb": nfc(f"photos/thumbs/{thumb.name}"),
             "lat": coords[0],

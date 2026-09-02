@@ -77,5 +77,435 @@
   "country:34.43,134.06": "Japan",
   "country:38.27,140.55": "Japan",
   "country:33.56,130.20": "Japan",
-  "country:35.32,139.55": "Japan"
+  "country:35.32,139.55": "Japan",
+  "Acapulco": [
+    16.86805,
+    -99.894018
+  ],
+  "country:16.87,-99.89": "Mexico",
+  "Arena México": [
+    19.424614,
+    -99.152001
+  ],
+  "en:19.4246,-99.1520": "Mexico City",
+  "country:19.42,-99.15": "Mexico",
+  "Beagle Channel": [
+    -54.902399,
+    -68.490348
+  ],
+  "country:-54.90,-68.49": "Chile",
+  "Bosque de Chapultepec": [
+    19.155123,
+    -98.258991
+  ],
+  "country:19.16,-98.26": "Mexico",
+  "Buenos Aires": [
+    -34.609558,
+    -58.38879
+  ],
+  "country:-34.61,-58.39": "Argentina",
+  "Burano": [
+    45.485356,
+    12.417538
+  ],
+  "country:45.49,12.42": "Italy",
+  "Calakmul": [
+    18.486203,
+    -89.657571
+  ],
+  "country:18.49,-89.66": "Mexico",
+  "Casa de los Azulejos": [
+    25.762328,
+    -100.298587
+  ],
+  "country:25.76,-100.30": "Mexico",
+  "Catedral Metropolitana de la Ciudad de México": [
+    19.434382,
+    -99.133065
+  ],
+  "en:19.4344,-99.1331": "Mexico City",
+  "country:19.43,-99.13": "Mexico",
+  "Celestún": [
+    20.922158,
+    -90.298619
+  ],
+  "en:20.9222,-90.2986": null,
+  "country:20.92,-90.30": "Mexico",
+  "Chiapas": [
+    16.5,
+    -92.5
+  ],
+  "country:16.50,-92.50": "Mexico",
+  "Chicago": [
+    41.875562,
+    -87.624421
+  ],
+  "Cholula": [
+    19.067824,
+    -98.310631
+  ],
+  "country:19.07,-98.31": "Mexico",
+  "Civita": [
+    39.828804,
+    16.312488
+  ],
+  "country:39.83,16.31": "Italy",
+  "Cobá": [
+    20.49362,
+    -87.735367
+  ],
+  "en:20.4936,-87.7354": "Quintana Roo",
+  "country:20.49,-87.74": "Mexico",
+  "Coyoacán": [
+    19.349861,
+    -99.161975
+  ],
+  "en:19.3499,-99.1620": "Mexico City",
+  "country:19.35,-99.16": "Mexico",
+  "Cozumel": [
+    20.43206,
+    -86.920691
+  ],
+  "country:20.43,-86.92": "Mexico",
+  "Desierto de Siloli": [
+    -21.847249,
+    -67.900632
+  ],
+  "country:-21.85,-67.90": "Bolivia",
+  "El Calafate": [
+    -50.338738,
+    -72.273722
+  ],
+  "country:-50.34,-72.27": "Argentina",
+  "El Chaltén": [
+    -49.331956,
+    -72.886044
+  ],
+  "en:-49.3320,-72.8860": "El Chalten, Santa Cruz",
+  "country:-49.33,-72.89": "Argentina",
+  "Escadaria Selarón": [
+    -22.915445,
+    -43.179455
+  ],
+  "en:-22.9154,-43.1795": "Rio de Janeiro, Southeast Region",
+  "country:-22.92,-43.18": "Brazil",
+  "Firenze": [
+    43.769796,
+    11.25564
+  ],
+  "country:43.77,11.26": "Italy",
+  "Guanajuato": [
+    20.9877,
+    -101.0
+  ],
+  "country:20.99,-101.00": "Mexico",
+  "Iguazú": [
+    4.475113,
+    -75.209191
+  ],
+  "en:4.4751,-75.2092": "Tolima",
+  "country:4.48,-75.21": "Colombia",
+  "Isla Mujeres": [
+    21.237191,
+    -86.735
+  ],
+  "country:21.24,-86.73": "Mexico",
+  "La Habana": [
+    23.135305,
+    -82.358963
+  ],
+  "country:23.14,-82.36": "Cuba",
+  "La Paz": [
+    -16.495545,
+    -68.133623
+  ],
+  "country:-16.50,-68.13": "Bolivia",
+  "Laguna Cañapa": [
+    -21.509329,
+    -68.01297
+  ],
+  "en:-21.5093,-68.0130": "Municipio Colcha K",
+  "country:-21.51,-68.01": "Bolivia",
+  "Laguna Colorada": [
+    -22.206323,
+    -67.779398
+  ],
+  "country:-22.21,-67.78": "Bolivia",
+  "Las Coloradas": [
+    -39.556458,
+    -70.59408
+  ],
+  "country:-39.56,-70.59": "Argentina",
+  "Machu Picchu": [
+    -13.164341,
+    -72.545009
+  ],
+  "country:-13.16,-72.55": "Peru",
+  "Marina San Carlos": [
+    32.785995,
+    -117.041825
+  ],
+  "country:32.79,-117.04": "United States",
+  "Oaxaca": [
+    17.0,
+    -96.5
+  ],
+  "country:17.00,-96.50": "Mexico",
+  "Playa del Carmen": [
+    20.646285,
+    -87.080787
+  ],
+  "country:20.65,-87.08": "Mexico",
+  "Pão de Açúcar": [
+    -9.749655,
+    -37.432989
+  ],
+  "en:-9.7497,-37.4330": "Alagoas",
+  "country:-9.75,-37.43": "Brazil",
+  "Roma": [
+    41.89332,
+    12.482932
+  ],
+  "country:41.89,12.48": "Italy",
+  "Salar de Uyuni noche": null,
+  "Salar de Uyuni": [
+    -20.204264,
+    -67.514995
+  ],
+  "country:-20.20,-67.51": "Bolivia",
+  "San Francisco": [
+    37.787936,
+    -122.40752
+  ],
+  "country:37.79,-122.41": "United States",
+  "Tampico": [
+    41.632481,
+    -89.785039
+  ],
+  "country:41.63,-89.79": "United States",
+  "Taxco": [
+    18.556545,
+    -99.605284
+  ],
+  "country:18.56,-99.61": "Mexico",
+  "Tizimín": [
+    21.248597,
+    -87.872836
+  ],
+  "en:21.2486,-87.8728": null,
+  "country:21.25,-87.87": "Mexico",
+  "Tulum": [
+    20.429647,
+    -87.652931
+  ],
+  "country:20.43,-87.65": "Mexico",
+  "Universidad Nacional Autónoma de México": [
+    19.321597,
+    -99.184926
+  ],
+  "en:19.3216,-99.1849": "Mexico City",
+  "country:19.32,-99.18": "Mexico",
+  "Ushuaia": [
+    -54.807306,
+    -68.308413
+  ],
+  "country:-54.81,-68.31": "Argentina",
+  "Uxmal": [
+    20.36029,
+    -89.770561
+  ],
+  "country:20.36,-89.77": "Mexico",
+  "Valle de Bravo": [
+    19.18491,
+    -100.151263
+  ],
+  "country:19.18,-100.15": "Mexico",
+  "Vaticano": [
+    41.903411,
+    12.452853
+  ],
+  "country:41.90,12.45": "Vatican City",
+  "Venezia": [
+    45.437191,
+    12.33459
+  ],
+  "country:45.44,12.33": "Italy",
+  "Xcaret": [
+    20.581392,
+    -87.119037
+  ],
+  "country:20.58,-87.12": "Mexico",
+  "Xilitla": [
+    21.393527,
+    -99.013035
+  ],
+  "country:21.39,-99.01": "Mexico",
+  "Xochimilco": [
+    19.263361,
+    -99.104738
+  ],
+  "country:19.26,-99.10": "Mexico",
+  "お台場": [
+    35.619003,
+    139.779358
+  ],
+  "en:35.6190,139.7794": "Koto",
+  "country:35.62,139.78": "Japan",
+  "上海": [
+    31.231271,
+    121.470015
+  ],
+  "en:31.2313,121.4700": "Shanghai",
+  "country:31.23,121.47": "China",
+  "京都": [
+    34.986191,
+    135.760122
+  ],
+  "en:34.9862,135.7601": "Kyoto, Kyoto Prefecture",
+  "country:34.99,135.76": "Japan",
+  "country:38.27,140.87": "Japan",
+  "函館": [
+    41.774344,
+    140.726249
+  ],
+  "en:41.7743,140.7262": "Hakodate, Hokkaido Prefecture",
+  "country:41.77,140.73": "Japan",
+  "南锣鼓巷": [
+    39.932309,
+    116.397689
+  ],
+  "en:39.9323,116.3977": "Dongcheng District",
+  "country:39.93,116.40": "China",
+  "和歌山": [
+    34.232211,
+    135.19158
+  ],
+  "en:34.2322,135.1916": "Wakayama, Wakayama Prefecture",
+  "country:34.23,135.19": "Japan",
+  "奥入瀬渓流": null,
+  "姬路城": [
+    34.839331,
+    134.69402
+  ],
+  "en:34.8393,134.6940": "Himeji, Hyogo Prefecture",
+  "country:34.84,134.69": "Japan",
+  "富士山": [
+    35.362838,
+    138.730768
+  ],
+  "en:35.3628,138.7308": "Oyama, Shizuoka Prefecture",
+  "country:35.36,138.73": "Japan",
+  "小樽": [
+    43.197588,
+    140.993536
+  ],
+  "en:43.1976,140.9935": "Otaru, Hokkaido Prefecture",
+  "country:43.20,140.99": "Japan",
+  "山寺": [
+    38.309595,
+    140.434729
+  ],
+  "en:38.3096,140.4347": "Yamagata, Yamagata Prefecture",
+  "弘前": [
+    40.599551,
+    140.485209
+  ],
+  "en:40.5996,140.4852": "Hirosaki, Aomori Prefecture",
+  "country:40.60,140.49": "Japan",
+  "明石海峡大桥": [
+    34.616641,
+    135.020881
+  ],
+  "en:34.6166,135.0209": "Awaji, Hyogo Prefecture",
+  "country:34.62,135.02": "Japan",
+  "洞爺湖": [
+    42.601966,
+    140.895691
+  ],
+  "en:42.6020,140.8957": "Sobetsu, Hokkaido Prefecture",
+  "country:42.60,140.90": "Japan",
+  "湘南海岸": [
+    35.326802,
+    139.450261
+  ],
+  "en:35.3268,139.4503": "Fujisawa, Kanagawa Prefecture",
+  "country:35.33,139.45": "Japan",
+  "熊本城": [
+    32.805269,
+    130.705464
+  ],
+  "en:32.8053,130.7055": "Kumamoto, Kumamoto Prefecture",
+  "country:32.81,130.71": "Japan",
+  "石家庄": [
+    38.042974,
+    114.508838
+  ],
+  "en:38.0430,114.5088": "Shijiazhuang, Hebei",
+  "country:38.04,114.51": "China",
+  "神戸": [
+    34.679288,
+    135.178282
+  ],
+  "en:34.6793,135.1783": "Kobe, Hyogo Prefecture",
+  "country:34.68,135.18": "Japan",
+  "福岡": [
+    36.70811,
+    136.931742
+  ],
+  "en:36.7081,136.9317": "Takaoka, Toyama Prefecture",
+  "country:36.71,136.93": "Japan",
+  "秋保": [
+    39.717256,
+    140.124506
+  ],
+  "en:39.7173,140.1245": "Akita, Akita Prefecture",
+  "country:39.72,140.12": "Japan",
+  "美瑛町": [
+    43.588238,
+    142.466929
+  ],
+  "en:43.5882,142.4669": "Biei, Hokkaido Prefecture",
+  "country:43.59,142.47": "Japan",
+  "西安": [
+    34.261004,
+    108.942336
+  ],
+  "en:34.2610,108.9423": "Lianhu District, Shaanxi",
+  "country:34.26,108.94": "China",
+  "那須町": [
+    37.019838,
+    140.120865
+  ],
+  "en:37.0198,140.1209": "Nasu, Tochigi Prefecture",
+  "country:37.02,140.12": "Japan",
+  "重庆": [
+    30.05518,
+    107.874871
+  ],
+  "en:30.0552,107.8749": "Longkong, Chongqing",
+  "country:30.06,107.87": "China",
+  "金门岛": [
+    31.316837,
+    120.610691
+  ],
+  "en:31.3168,120.6107": "Gusu District, Jiangsu",
+  "country:31.32,120.61": "China",
+  "锡林郭勒盟": [
+    43.930437,
+    116.04152
+  ],
+  "en:43.9304,116.0415": "Xilinhot City, Inner Mongolia",
+  "country:43.93,116.04": "China",
+  "阿蘇山": [
+    32.882702,
+    131.09474
+  ],
+  "en:32.8827,131.0947": "Minamiaso, Kumamoto Prefecture",
+  "country:32.88,131.09": "Japan",
+  "青岛": [
+    36.066325,
+    120.377766
+  ],
+  "en:36.0663,120.3778": "Shinan District, Shandong",
+  "country:36.07,120.38": "China"
 }

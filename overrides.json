@@ -24,5 +24,18 @@
     "location": "東京・渋谷",
     "location_en": "Tokyo Shibuya",
     "caption": "Cherry blossom season"
+  },
+  "Salar de Uyuni noche.jpg": {
+    "lat": -20.204264,
+    "lng": -67.514995,
+    "location": "Salar de Uyuni",
+    "country": "Bolivia"
+  },
+  "奥入瀬渓流.jpg": {
+    "lat": 40.5561,
+    "lng": 140.9536,
+    "location": "奥入瀬渓流",
+    "location_en": "Towada, Aomori Prefecture",
+    "country": "Japan"
   }
 }
