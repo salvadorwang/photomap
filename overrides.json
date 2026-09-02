@@ -43,5 +43,68 @@
     "lng": -81.5639,
     "location": "Walt Disney World, Orlando",
     "country": "United States"
+  },
+  "La Paz.JPG": {
+    "lat": 24.162,
+    "lng": -110.3159,
+    "location": "La Paz",
+    "location_en": "Baja California Sur",
+    "country": "Mexico"
+  },
+  "Las Coloradas.jpg": {
+    "lat": 21.6079,
+    "lng": -87.99,
+    "location": "Las Coloradas",
+    "location_en": "Río Lagartos, Yucatán",
+    "country": "Mexico"
+  },
+  "Pão de Açúcar.JPG": {
+    "lat": -22.9495,
+    "lng": -43.1562,
+    "location": "Pão de Açúcar",
+    "location_en": "Rio de Janeiro",
+    "country": "Brazil"
+  },
+  "Iguazú.jpg": {
+    "lat": -25.6925,
+    "lng": -54.4411,
+    "location": "Iguazú",
+    "location_en": "Puerto Iguazú, Misiones",
+    "country": "Argentina"
+  },
+  "Bosque de Chapultepec.JPG": {
+    "lat": 19.4204,
+    "lng": -99.1819,
+    "location": "Bosque de Chapultepec",
+    "location_en": "Mexico City",
+    "country": "Mexico"
+  },
+  "Casa de los Azulejos.jpg": {
+    "lat": 19.4344,
+    "lng": -99.1401,
+    "location": "Casa de los Azulejos",
+    "location_en": "Mexico City",
+    "country": "Mexico"
+  },
+  "Tampico.JPG": {
+    "lat": 22.2701,
+    "lng": -97.8949,
+    "location": "Tampico",
+    "location_en": "Tamaulipas",
+    "country": "Mexico"
+  },
+  "金门岛.JPG": {
+    "lat": 24.4481,
+    "lng": 118.3856,
+    "location": "金门岛",
+    "location_en": "Kinmen",
+    "country": "China"
+  },
+  "福岡.JPG": {
+    "lat": 33.5899,
+    "lng": 130.4018,
+    "location": "福岡",
+    "location_en": "Fukuoka, Fukuoka Prefecture",
+    "country": "Japan"
   }
 }
