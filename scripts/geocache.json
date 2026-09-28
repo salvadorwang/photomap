@@ -601,5 +601,17 @@
   ],
   "en:34.6197,112.4477": "Luolong District, Henan",
   "country:34.62,112.45": "China",
-  "country:24.45,118.39": "Taiwan"
+  "country:24.45,118.39": "Taiwan",
+  "新潟": [
+    37.912244,
+    139.061329
+  ],
+  "en:37.9122,139.0613": "Niigata, Niigata Prefecture",
+  "country:37.91,139.06": "Japan",
+  "横浜": [
+    35.465807,
+    139.622266
+  ],
+  "en:35.4658,139.6223": "Yokohama, Kanagawa Prefecture",
+  "country:35.47,139.62": "Japan"
 }

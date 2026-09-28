@@ -1,5 +1,29 @@
 [
   {
+    "file": "photos/新潟 2026-09-19.jpg",
+    "original": "photos/新潟 2026-09-19.jpg",
+    "thumb": "photos/thumbs/新潟 2026-09-19.jpg",
+    "lat": 37.912244,
+    "lng": 139.061329,
+    "date": "2026-09-19",
+    "location": "新潟",
+    "location_en": "Niigata, Niigata Prefecture",
+    "country": "Japan",
+    "caption": ""
+  },
+  {
+    "file": "photos/横浜.JPG",
+    "original": "photos/横浜.JPG",
+    "thumb": "photos/thumbs/横浜.jpg",
+    "lat": 35.465807,
+    "lng": 139.622266,
+    "date": "2026-09-14",
+    "location": "横浜",
+    "location_en": "Yokohama, Kanagawa Prefecture",
+    "country": "Japan",
+    "caption": ""
+  },
+  {
     "file": "photos/Chicago.jpg",
     "original": "photos/Chicago.jpg",
     "thumb": "photos/thumbs/Chicago.jpg",
